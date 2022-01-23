@@ -1,70 +1,134 @@
-# Getting Started with Create React App
+# Lector RSS para Intelygenz
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introducción
 
-## Available Scripts
+Esta prueba técnica consiste en implementar un lector RSS básico.
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+## Tabla de contenidos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* [Prueba técnica](#prueba-tecnica)
+* [Revisión](#revision)
+* [Tecnologías](#tecnologias)
+* [Estructura](#estructura)
+* [Ejecución](#ejecucion)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br>
 
-### `yarn test`
+## Prueba tecnica 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+El lector RSS debe contar con las siguientes características:
+- La pantalla principal de la aplicación será un listado de noticias ordenadas por fecha (o por algún campo que
+devuelva el RSS).
+- Cada fila debe contener el título, una descripción de no más de dos líneas y la imagen de la noticia
+correspondiente.
+- Al seleccionar una fila se debe abrir una pantalla con el detalle de la noticia.
+- La pantalla de detalle contendrá el título, la descripción completa y la imagen de la noticia.
+- En caso de utilizar librerías externas de terceros, justificar brevemente el motivo de cada una.
+- El origen de datos es libre: cualquier feed JSON Feed o xml dinámico online. Como por ejemplo el feed de Xataka
+Android ( http://www.xatakandroid.com/tag/feeds/rss2.xml )
+- Se debe crear un repositorio gratuito en GitLab (https://gitlab.com/) Github (https://github.com/) o Bitbucket
+(https://bitbucket.org/) y hacer buen uso de la herramienta para la elaboración y evolución del código de la App
+Lector RSS.
 
-### `yarn build`
+Se darán puntos adicionales por:
+- Buscar en el listado de noticias por título.
+- Breve descripción de los patrones de diseño utilizados y motivo de su uso.
+- Realizar tests.
+- Añadir funcionalidad básica extra.
+- Crear un buen README.md
+- El aspecto gráfico de la app, puedes añadir si quieres cualquier librería de componentes o de CSS.
+Se valorará especialmente:
+- Corrección del código: organización de métodos y clases, reutilización de componentes, arquitectura,
+dependencias, posibilidad de escalado futuro.
+- Comentarios y mantenibilidad del código.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Revision
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+En esta prueba he desarrollado un buscador de feeds que admite urls acabadas en rss, xml y rss aunque se podría modificar para admitir otras opciones.
 
-### `yarn eject`
+He intentado no usar ninguna librería externa para tratar URLs y formularios para evitar aumentar el peso y para demostrar que puedo realizar la gestión de estas tareas.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+He seguido algunos de los métodos organizativos sugerido por desarrolladores más experimentados en diversos blogs, dado que, por lo que he leído, no hay un consenso generalizado.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Mi intención era realizar componentes lo más reusables posible con el conocimiento que tengo. Están hechos específicamente para los atributos esperados para esta prueba pero son fácilmente extendibles cuando se requieran ampliar las funcionalidades.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Los componentes y páginas están en organizados en carpetas por la posibilidad de añadir los archivos de tests y archivos de estilos dentro de la unidad que representa el componente aunque finalmente, con Bootstrap, un poco de css en linea y en App.css he añadido el estilo dentro del tiempo que tenía.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+He extraido las funciones con la lógica de mapeo de la información requerida para el feed (título, descripción e imagen) en utils/feeds.js porque me parecía que quedaba un componente más limpio y quedaba todo más ordenado.
 
-## Learn More
+En este README, en los títulos faltan los acentos para que coja el hipervínculo interno de la sección "Tabla de contenidos"
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Para mi, ha sido un gran desafío y me he resultado complicado en varios puntos:
+- Particularmente dificil gestionar los XML ya que dependiendo del sitio url al que se hicera la solicitud, la respuesta XML venía con ciertos campos con HTML embebido con muchos espacios en blanco entre tags y de mil formas diferentes, como por ejemplo con CDATA.
+- No he conseguido obtener ningún ejemplo de url para JSON feeds con imagenes por lo que no he podido realizar todas las pruebas y lo he realizado acorde la estructura oficial en https://www.jsonfeed.org/version/1.1/.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Por falta de tiempo, no he realizado en el momento de la entrega tests unitarios ni funcionalidad de la búsqueda de noticias por títulos.
 
-### Code Splitting
+Soy consciente de que aún le queda trabajo pero lo he hecho lo mejor que podido en el tiempo que he tenido.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<br>
 
-### Analyzing the Bundle Size
+## Tecnologias
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    "@testing-library/jest-dom": "^5.14.1"
+    "@testing-library/react": "^12.0.0"
+    "@testing-library/user-event": "^13.2.1"
+    "bootstrap": "^5.1.3"
+    "react": "^17.0.2"
+    "react-dom": "^17.0.2"
+    "react-scripts": "^3.0.1"
+    "web-vitals": "^2.1.0"
 
-### Making a Progressive Web App
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Estructura
 
-### Advanced Configuration
+```
+public/
+src/
+|_ App.js
+|_ App.css
+|_ App.test.js
+|_ index.js
+|_ reportWebVitals.js
+|_ setupTests.js
+    |_ components/
+        |_ Buttons/
+            |_ Button.jsx
+        |_ Feed/
+            |_ Feed.jsx
+        |_ Forms/
+            |_ Form/
+                |_ Form.jsx
+            |_ InputForm/
+                |_ InputForm.jsx
+            |_ RSSUrlForm/
+                |_ RSSUrlForm.jsx
+        |_ Title/
+            |_ Title.jsx
+    |_ pages/
+        |_ FeedDetailedPage/
+            |_ FeedDetailedPage.jsx
+        |_ HomePage/
+            |_ HomePage.jsx
+    |_ utils/
+        |_ feeds.js
+        |_ strings.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+``` 
+<br>
 
-### Deployment
+## Ejecucion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Desde la carpeta principal (basic-rss-reader-intelygenz):
+```
+npm install
+```
+Con esto se instalaran las dependencias, y para ejecutar la app:
+```
+npm start
+```
